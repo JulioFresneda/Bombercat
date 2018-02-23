@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour {
 
     public Tilemap tilemap;
     public float velocityPlayer = 4f;
-    public int lives = 3;
+    public int lifes = 3;
     public int explosionRange = 1;
     public int bombsTogether = 1;
 
@@ -24,8 +24,14 @@ public class PlayerController : MonoBehaviour {
 
     public GameObject Enemy;
 
+    public int score;
+    public int level;
+
     // Use this for initialization
     void Start () {
+
+        score = 0;
+        level = 1;
 
         rigidbody = gameObject.GetComponent<Rigidbody2D>();
 
@@ -79,9 +85,9 @@ public class PlayerController : MonoBehaviour {
 
     public void Killed()
     {
-        if (lives > 1)
+        if (lifes > 1)
         {
-            lives--;
+            lifes--;
             gameObject.GetComponent<Transform>().position = respawn;
         }
         // else Destroy(gameObject);
