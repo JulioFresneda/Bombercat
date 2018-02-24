@@ -5,15 +5,12 @@ using UnityEngine.Tilemaps;
 
 public class EnemyController : MonoBehaviour
 {
-
-
-    public Tilemap tilemap;
     public float velocityEnemy = 0.1f;
 
     public Tile wallTile;
     public Tile destructibleTile;
 
-    public GameObject player;
+   
 
     private new Rigidbody2D rigidbody;
 
@@ -26,20 +23,18 @@ public class EnemyController : MonoBehaviour
 
     bool changeDirection;
 
-    public static int numEnemies = 0;
+    Tilemap tilemap;
+    
 
      
 
     // Use this for initialization
     void Start()
     {
-
-        numEnemies++;
-        if (numEnemies < 5) Instantiate(gameObject);
+       
+        tilemap = GameObject.FindGameObjectWithTag("TilemapGameplay").GetComponent<Tilemap>();
         RandomDirection();
         rigidbody = gameObject.GetComponent<Rigidbody2D>();
-        //rigidbody.position = GameObject.FindGameObjectWithTag("EnemyGenerator").GetComponent<Transform>().position;
-
 
         CentrarPos();
 
@@ -49,16 +44,14 @@ public class EnemyController : MonoBehaviour
         
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         Move();
-        
-           
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player") player.GetComponent<PlayerController>().Killed();
+        if (collision.gameObject.tag == "Player") GameObject.FindGameObjectWithTag("Level").GetComponent<LevelScript>().Killed();
         if (collision.gameObject.tag == "Enemy") Physics2D.IgnoreCollision(collision.collider, gameObject.GetComponent<Collider2D>());
     }
 
