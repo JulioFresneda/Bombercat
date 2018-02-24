@@ -5,25 +5,18 @@ using UnityEngine.Tilemaps;
 
 public class MapDestroyer : MonoBehaviour {
 
-    private Tilemap tilemap;
+    public Tilemap tilemap;
 
     public Tile wallTile;
     public Tile destructibleTile;
 
-    private GameObject player;
-    private GameObject level;
+    public GameObject player;
+    public GameObject level;
 
     public GameObject explosionPrefab;
 
-    public void Start()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-        level = GameObject.FindGameObjectWithTag("Level");
-    }
-
     public void Explode( Vector2 worldPos )
     {
- 
         Vector3Int originalCell = tilemap.WorldToCell(worldPos);
         int explosionRange = player.GetComponent<PlayerController>().explosionRange;
 
@@ -62,7 +55,7 @@ public class MapDestroyer : MonoBehaviour {
         
         if( cell == tilemap.WorldToCell(player.GetComponent<Transform>().position))
         {
-            level.GetComponent<LevelScript>().Killed();
+            player.GetComponent<PlayerController>().Killed();
         }
 
         foreach( GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy") )
