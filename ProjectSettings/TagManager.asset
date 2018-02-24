@@ -10,6 +10,7 @@ TagManager:
   - PowerUp
   - Level
   - Goal
+  - TilemapGameplay
   layers:
   - Default
   - TransparentFX

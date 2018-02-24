@@ -15,7 +15,7 @@ public class ExtraLifeScript : MonoBehaviour {
 
     private void PickUp(Collider2D player)
     {
-        player.GetComponent<PlayerController>().lifes++;
+        level.GetComponent<LevelScript>().lifes++;
         level.GetComponent<LevelScript>().score += 5 * level.GetComponent<LevelScript>().level;
         Destroy(gameObject);
     }
