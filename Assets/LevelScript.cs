@@ -34,12 +34,12 @@ public class LevelScript : MonoBehaviour {
         level = 1;
         score = 0;
         lifes = 3;
-
+        Debug.Log("xx");
         tilemap = GameObject.FindGameObjectWithTag("TilemapGameplay").GetComponent<Tilemap>();
         respawn = tilemap.GetCellCenterWorld(new Vector3Int(-6, 5, 0));
 
-        if (player == null) player = Instantiate(player, respawn, Quaternion.identity);
-        
+        player = Instantiate(player, respawn, Quaternion.identity);
+        Debug.Log("xx");
         mapGenerator.GetComponent<MapGeneratorScript>().GenerateNewMap();
     }
 	
@@ -64,7 +64,7 @@ public class LevelScript : MonoBehaviour {
         if (lifes > 1)
         {
             lifes--;
-            gameObject.GetComponent<Transform>().position = respawn;
+            player.GetComponent<Transform>().position = respawn;
             player.GetComponent<PlayerController>().Default();
         }
         // else GameOver

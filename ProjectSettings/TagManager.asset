@@ -11,6 +11,7 @@ TagManager:
   - Level
   - Goal
   - TilemapGameplay
+  - EnemyGenerator
   layers:
   - Default
   - TransparentFX

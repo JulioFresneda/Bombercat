@@ -15,15 +15,14 @@ public class MapDestroyer : MonoBehaviour {
 
     public GameObject explosionPrefab;
 
-    public void Start()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-        level = GameObject.FindGameObjectWithTag("Level");
-    }
+    
 
     public void Explode( Vector2 worldPos )
     {
- 
+        player = GameObject.FindGameObjectWithTag("Player");
+        level = GameObject.FindGameObjectWithTag("Level");
+        tilemap = GameObject.FindGameObjectWithTag("TilemapGameplay").GetComponent<Tilemap>();
+
         Vector3Int originalCell = tilemap.WorldToCell(worldPos);
         int explosionRange = player.GetComponent<PlayerController>().explosionRange;
 

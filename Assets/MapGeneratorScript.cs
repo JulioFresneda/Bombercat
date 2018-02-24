@@ -29,33 +29,20 @@ public class MapGeneratorScript : MonoBehaviour {
     Vector3Int enemyGenCell;
 
 
-
-
-    // Use this for initialization
-    void Start () {
-        
-        maxY = level.GetComponent<LevelScript>().maxY;
-        maxX = level.GetComponent<LevelScript>().maxX;
-        minY = level.GetComponent<LevelScript>().minY;
-        minX = level.GetComponent<LevelScript>().minX;
-
-        tilemap = GameObject.FindGameObjectWithTag("TilemapGameplay").GetComponent<Tilemap>();
-        level = GameObject.FindGameObjectWithTag("Level");
-
-        DestroyOldMap();
-        GenerateNewMap();
-       
-	}
-	
-	
-
-  
+ 
 
 
     public void GenerateNewMap()
     {
         tilemap = GameObject.FindGameObjectWithTag("TilemapGameplay").GetComponent<Tilemap>();
         level = GameObject.FindGameObjectWithTag("Level");
+
+        maxY = level.GetComponent<LevelScript>().maxY;
+        maxX = level.GetComponent<LevelScript>().maxX;
+        minY = level.GetComponent<LevelScript>().minY;
+        minX = level.GetComponent<LevelScript>().minX;
+
+        
 
         nLevel = level.GetComponent<LevelScript>().level;
         numberPowerUps = nLevel + 1;
@@ -98,6 +85,7 @@ public class MapGeneratorScript : MonoBehaviour {
         }
 
         currentEnemyGen = Instantiate(enemyGenerator, tilemap.GetCellCenterWorld(new Vector3Int(x, y, 0)), Quaternion.identity);
+        
         currentEnemyGen.GetComponent<EnemyGeneratorScript>().GenerateEnemies(level.GetComponent<LevelScript>().level);
         enemyGenCell = new Vector3Int(x, y, 0);
 
@@ -118,6 +106,13 @@ public class MapGeneratorScript : MonoBehaviour {
 
     void DestroyOldMap()
     {
+
+
+        maxY = level.GetComponent<LevelScript>().maxY;
+        maxX = level.GetComponent<LevelScript>().maxX;
+        minY = level.GetComponent<LevelScript>().minY;
+        minX = level.GetComponent<LevelScript>().minX;
+
         tilemap = GameObject.FindGameObjectWithTag("TilemapGameplay").GetComponent<Tilemap>();
         level = GameObject.FindGameObjectWithTag("Level");
 
@@ -182,7 +177,7 @@ public class MapGeneratorScript : MonoBehaviour {
     bool CantPutGoal(int x, int y)
     {
         bool cant = false;
-        cant = tilemap.GetTile(new Vector3Int(x, y, 0)) != wall || (x <= minX + 1 && y >= maxY - 1) || (x >= enemyGenCell.x - 1 && x <= enemyGenCell.x + 1 && y >= enemyGenCell.y - 1 && y <= enemyGenCell.y + 1);
+        cant = tilemap.GetTile(new Vector3Int(x, y, 0)) == wall || tilemap.GetTile(new Vector3Int(x, y, 0)) != destructable || (x <= minX + 1 && y >= maxY - 1) || (x >= enemyGenCell.x - 1 && x <= enemyGenCell.x + 1 && y >= enemyGenCell.y - 1 && y <= enemyGenCell.y + 1);
         if (!cant)
         {
             if (GameObject.FindGameObjectWithTag("Goal") != null) cant = (new Vector3Int(x, y, 0) == GameObject.FindGameObjectWithTag("Goal").GetComponent<Transform>().position);
@@ -190,6 +185,13 @@ public class MapGeneratorScript : MonoBehaviour {
         if (!cant)
         {
             if (GameObject.FindGameObjectWithTag("EnemyGenerator") != null) cant = (new Vector3Int(x, y, 0) == GameObject.FindGameObjectWithTag("EnemyGenerator").GetComponent<Transform>().position);
+        }
+
+        if (!cant) {
+            foreach (GameObject powerup in GameObject.FindGameObjectsWithTag("PowerUp"))
+            {
+                if (tilemap.WorldToCell(powerup.GetComponent<Transform>().position) == new Vector3Int(x, y, 0)) cant = true;
+            }
         }
 
         if (!cant) cant = (x <= 0 && y >= 0);
