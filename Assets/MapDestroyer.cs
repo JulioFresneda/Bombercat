@@ -21,7 +21,7 @@ public class MapDestroyer : MonoBehaviour {
 
         ExplodeCell(originalCell);
 
-        for (int i = 1; i <= explosionRange && ExplodeCell(originalCell + new Vector3Int(i, 0, 0)); i++ ){}
+        for (int i = 1; i <= explosionRange && ExplodeCell(originalCell + new Vector3Int(i, 0, 0)); i++ ){ }
         for (int i = 1; i <= explosionRange && ExplodeCell(originalCell + new Vector3Int(-i, 0, 0)); i++) { }
         for (int i = 1; i <= explosionRange && ExplodeCell(originalCell + new Vector3Int(0, i, 0)); i++) { }
         for (int i = 1; i <= explosionRange && ExplodeCell(originalCell + new Vector3Int(0, -i, 0)); i++) { }
@@ -40,6 +40,7 @@ public class MapDestroyer : MonoBehaviour {
 
         if( tile == destructibleTile )
         {
+            player.GetComponent<PlayerController>().score++;
             tilemap.SetTile(cell, null);
         }
 
@@ -56,6 +57,7 @@ public class MapDestroyer : MonoBehaviour {
         {
             if (cell == tilemap.WorldToCell(enemy.GetComponent<Transform>().position))
             {
+                player.GetComponent<PlayerController>().score += 10 * player.GetComponent<PlayerController>().level;
                 Destroy(enemy);
             }
         }

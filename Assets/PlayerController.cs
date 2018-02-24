@@ -98,6 +98,7 @@ public class PlayerController : MonoBehaviour {
         if( tilemap.WorldToCell(goal.GetComponent<Transform>().position) == tilemap.WorldToCell(gameObject.GetComponent<Transform>().position))
         {
             win = true;
+            score += 100 * level;
             // WIN
         }
     }

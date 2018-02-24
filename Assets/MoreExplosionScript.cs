@@ -17,6 +17,7 @@ public class MoreExplosionScript : MonoBehaviour
     private void PickUp(Collider2D player)
     {
         player.GetComponent<PlayerController>().explosionRange++;
+        player.GetComponent<PlayerController>().score += 5 * player.GetComponent<PlayerController>().level;
         Destroy(gameObject);
     }
 
