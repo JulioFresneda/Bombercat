@@ -11,27 +11,25 @@ public class PlayerController : MonoBehaviour {
     public int lifes = 3;
     public int explosionRange = 1;
     public int bombsTogether = 1;
+    public GameObject level;
 
     public Tile wallTile;
     public Tile destructibleTile;
 
     private new Rigidbody2D rigidbody;
 
-    public GameObject goal;
-    public bool win = false;
+
+    
 
     private Vector3 respawn;
 
-    public GameObject Enemy;
 
-    public int score;
-    public int level;
+    
 
     // Use this for initialization
     void Start () {
 
-        score = 0;
-        level = 1;
+       
 
         rigidbody = gameObject.GetComponent<Rigidbody2D>();
 
@@ -95,11 +93,11 @@ public class PlayerController : MonoBehaviour {
 
     void InGoal()
     {
-        if( tilemap.WorldToCell(goal.GetComponent<Transform>().position) == tilemap.WorldToCell(gameObject.GetComponent<Transform>().position))
+        if( tilemap.WorldToCell(GameObject.FindGameObjectWithTag("Goal").GetComponent<Transform>().position) == tilemap.WorldToCell(gameObject.GetComponent<Transform>().position))
         {
-            win = true;
-            score += 100 * level;
-            // WIN
+            Debug.Log("WINNNNN");
+            level.GetComponent<LevelScript>().Win();
+            gameObject.GetComponent<Transform>().position = respawn;
         }
     }
 }

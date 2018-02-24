@@ -11,6 +11,7 @@ public class MapDestroyer : MonoBehaviour {
     public Tile destructibleTile;
 
     public GameObject player;
+    public GameObject level;
 
     public GameObject explosionPrefab;
 
@@ -38,11 +39,15 @@ public class MapDestroyer : MonoBehaviour {
             return false;
         }
 
-        if( tile == destructibleTile )
+        foreach (GameObject powerup in GameObject.FindGameObjectsWithTag("PowerUp"))
         {
-            player.GetComponent<PlayerController>().score++;
-            tilemap.SetTile(cell, null);
+            if (cell == tilemap.WorldToCell(powerup.GetComponent<Transform>().position) && !tilemap.HasTile(cell))
+            {
+                Destroy(powerup);
+            }
         }
+
+        
 
         Vector3 pos = tilemap.GetCellCenterWorld(cell);
         Instantiate(explosionPrefab, pos, Quaternion.identity);
@@ -57,18 +62,20 @@ public class MapDestroyer : MonoBehaviour {
         {
             if (cell == tilemap.WorldToCell(enemy.GetComponent<Transform>().position))
             {
-                player.GetComponent<PlayerController>().score += 10 * player.GetComponent<PlayerController>().level;
+                level.GetComponent<LevelScript>().score += 10 * level.GetComponent<LevelScript>().level;
                 Destroy(enemy);
             }
         }
 
-        foreach (GameObject powerup in GameObject.FindGameObjectsWithTag("PowerUp"))
+        if (tile == destructibleTile)
         {
-            if (cell == tilemap.WorldToCell(powerup.GetComponent<Transform>().position))
-            {
-                Destroy(powerup);
-            }
+            level.GetComponent<LevelScript>().score++;
+            tilemap.SetTile(cell, null);
+            return false;
+
         }
+
+
 
 
 

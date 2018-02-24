@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ExtraLifeScript : MonoBehaviour {
-
+    private GameObject level;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -16,14 +16,14 @@ public class ExtraLifeScript : MonoBehaviour {
     private void PickUp(Collider2D player)
     {
         player.GetComponent<PlayerController>().lifes++;
-        player.GetComponent<PlayerController>().score+=5* player.GetComponent<PlayerController>().level;
+        level.GetComponent<LevelScript>().score += 5 * level.GetComponent<LevelScript>().level;
         Destroy(gameObject);
     }
 
     // Use this for initialization
     void Start () {
-		
-	}
+        level = GameObject.FindGameObjectWithTag("Level");
+    }
 	
 	// Update is called once per frame
 	void Update () {

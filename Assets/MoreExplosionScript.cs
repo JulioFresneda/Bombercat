@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoreExplosionScript : MonoBehaviour
 {
-
+    private GameObject level;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -17,14 +17,14 @@ public class MoreExplosionScript : MonoBehaviour
     private void PickUp(Collider2D player)
     {
         player.GetComponent<PlayerController>().explosionRange++;
-        player.GetComponent<PlayerController>().score += 5 * player.GetComponent<PlayerController>().level;
+        level.GetComponent<LevelScript>().score += 5 * level.GetComponent<LevelScript>().level;
         Destroy(gameObject);
     }
 
     // Use this for initialization
     void Start()
     {
-
+        level = GameObject.FindGameObjectWithTag("Level");
     }
 
     // Update is called once per frame

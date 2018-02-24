@@ -8,6 +8,8 @@ TagManager:
   - Bomb
   - ExtraLife
   - PowerUp
+  - Level
+  - Goal
   layers:
   - Default
   - TransparentFX

@@ -16,16 +16,17 @@ public class ScoreScript : MonoBehaviour {
 
 
     public GameObject player;
+    public GameObject level;
 
 	// Use this for initialization
 	void Start () {
-        
-	}
+       
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        scoreText.text = "Score: " + player.GetComponent<PlayerController>().score.ToString();
-        levelText.text = "Level: " + player.GetComponent<PlayerController>().level.ToString();
+        scoreText.text = "Score: " + level.GetComponent<LevelScript>().score.ToString();
+        levelText.text = "Level: " + level.GetComponent<LevelScript>().level.ToString();
         lifesText.text = "Lifes: " + player.GetComponent<PlayerController>().lifes.ToString();
         bombsText.text = "Bombs: " + player.GetComponent<PlayerController>().bombsTogether.ToString();
         velocityNormalized = player.GetComponent<PlayerController>().velocityPlayer - 3f;

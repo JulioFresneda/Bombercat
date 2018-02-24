@@ -31,7 +31,6 @@ public class Bomb : MonoBehaviour {
     {
         if( collision.CompareTag("Player") )
         {
-            Debug.Log("OKOK");
             gameObject.GetComponent<Collider2D>().isTrigger = false;
         }
     }

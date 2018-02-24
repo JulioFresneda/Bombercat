@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114623809884555016}
   m_Layer: 0
   m_Name: ExtraLife
-  m_TagString: ExtraLife
+  m_TagString: PowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
