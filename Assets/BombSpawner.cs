@@ -12,11 +12,19 @@ public class BombSpawner : MonoBehaviour {
     public GameObject player;
     private int bombsTogether;
 
-	// Update is called once per frame
-	void Update () {
+    public bool paused;
+
+    private void Start()
+    {
+        paused = false;
+    }
+
+
+    // Update is called once per frame
+    void Update () {
         bombsTogether = player.GetComponent<PlayerController>().bombsTogether;
 
-        if ( Input.GetMouseButtonDown(0) )
+        if ( Input.GetMouseButtonDown(0) && !paused )
         {
 
             Vector3 worldPos = player.GetComponent<Transform>().position;
