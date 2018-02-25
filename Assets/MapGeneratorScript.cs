@@ -142,11 +142,103 @@ public class MapGeneratorScript : MonoBehaviour {
 
     private void GenerateWalls( int nLevel )
     {
-        if( nLevel%10 == 1 )
+
+        if (nLevel % 10 == 4)
+        {
+
+            for( int i=minX+3; i<=minX+9; i++ )
+            {
+                if( i != minX+4 && i != minX+8 ) tilemap.SetTile(new Vector3Int(i, 4, 0), wall);
+            }
+
+            tilemap.SetTile(new Vector3Int(minX+2, 3, 0), wall);
+            tilemap.SetTile(new Vector3Int(minX + 10, 3, 0), wall);
+
+            tilemap.SetTile(new Vector3Int(minX+1, 2, 0), wall);
+            tilemap.SetTile(new Vector3Int(minX+11, 2, 0), wall);
+
+            tilemap.SetTile(new Vector3Int(minX + 1, 1, 0), wall);
+            tilemap.SetTile(new Vector3Int(minX + 3, 1, 0), wall);
+            tilemap.SetTile(new Vector3Int(minX + 9, 1, 0), wall);
+            tilemap.SetTile(new Vector3Int(minX + 11, 1, 0), wall);
+
+            for (int i = minX + 1; i <= minX + 11; i++)
+            {
+                if (i != minX + 2 && i != minX + 5 && i != minX + 6 && i != minX + 7 && i != minX + 10 ) tilemap.SetTile(new Vector3Int(i, 0, 0), wall);
+            }
+
+            for (int i = minX + 1; i <= minX + 11; i++)
+            {
+                if (i != minX + 2 && i != minX + 6 && i != minX + 10) tilemap.SetTile(new Vector3Int(i, -1, 0), wall);
+            }
+
+            tilemap.SetTile(new Vector3Int(minX + 1, -3, 0), wall);
+            tilemap.SetTile(new Vector3Int(minX + 11, -3, 0), wall);
+
+            tilemap.SetTile(new Vector3Int(minX + 2, -4, 0), wall);
+            tilemap.SetTile(new Vector3Int(minX + 3, -4, 0), wall);
+            tilemap.SetTile(new Vector3Int(minX + 9, -4, 0), wall);
+            tilemap.SetTile(new Vector3Int(minX + 10,-4, 0), wall);
+
+            for( int i=minX+3; i<=minX+9; i+=2 )
+            {
+                tilemap.SetTile(new Vector3Int(i, -5, 0), wall);
+            }
+
+            for (int i = minX + 3; i <= minX + 9; i ++)
+            {
+                tilemap.SetTile(new Vector3Int(i, -6, 0), wall);
+            }
+
+
+
+        }
+
+        if (nLevel % 10 == 3)
+        {
+            for (int i = minX + 1; i <= maxX; i += 2)
+            {
+                for (int j = minY + 1; j <= maxY; j += 2)
+                {
+                    if (i == minX + 1 || i == maxX - 1 || j == minY + 1 || j == maxY - 1) tilemap.SetTile(new Vector3Int(i, j, 0), wall);
+                }
+            }
+
+            for (int i = -3; i <=  3; i++)
+            {
+                if (i != 0) tilemap.SetTile(new Vector3Int(i, 2, 0), wall);
+                if (i != 0) tilemap.SetTile(new Vector3Int(i, -4, 0), wall);
+            }
+            for (int j = -4; j <= 2; j++)
+            {
+                if (j != -1) tilemap.SetTile(new Vector3Int(3,j, 0), wall);
+                if (j != -1) tilemap.SetTile(new Vector3Int(-3, j, 0), wall);
+            }
+        }
+
+        if ( nLevel%10 == 2 )
         {
             for( int i=minX+1; i<=maxX; i+=2 )
             {
                 for( int j=minY+1; j<=maxY; j+=2 )
+                {
+                    tilemap.SetTile(new Vector3Int(i, j, 0), wall);
+                }
+            }
+
+            for( int i=minX+1; i<=maxX; i+=4 )
+            {
+                tilemap.SetTile(new Vector3Int(i, 3, 0), wall);
+                tilemap.SetTile(new Vector3Int(i, -5, 0), wall);
+                tilemap.SetTile(new Vector3Int(i+2, -1, 0), wall);
+            }
+        }
+
+        if( nLevel%10 == 1 )
+        {
+            for (int i = minX + 1; i <= maxX; i += 2)
+            {
+                for (int j = minY + 1; j <= maxY; j += 2)
                 {
                     tilemap.SetTile(new Vector3Int(i, j, 0), wall);
                 }
