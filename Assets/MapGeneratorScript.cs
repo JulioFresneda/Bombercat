@@ -34,7 +34,11 @@ public class MapGeneratorScript : MonoBehaviour {
 
     public void GenerateNewMap()
     {
+
+        
         tilemap = GameObject.FindGameObjectWithTag("TilemapGameplay").GetComponent<Tilemap>();
+        
+
         level = GameObject.FindGameObjectWithTag("Level");
 
         maxY = level.GetComponent<LevelScript>().maxY;
@@ -50,7 +54,7 @@ public class MapGeneratorScript : MonoBehaviour {
         GameObject powerup;
 
 
-
+        GenerateWalls(nLevel);
         
 
 
@@ -104,7 +108,7 @@ public class MapGeneratorScript : MonoBehaviour {
     }
 
 
-    void DestroyOldMap()
+    public void DestroyOldMap()
     {
 
 
@@ -118,9 +122,9 @@ public class MapGeneratorScript : MonoBehaviour {
 
         for (int i = minX; i <= maxX; i++)
         {
-            for (int j = minY; i < maxY; i++)
+            for (int j = minY; j <= maxY; j++)
             {
-                if (tilemap.GetTile<Tile>(new Vector3Int(i, j, 0)) == destructable) tilemap.SetTile(new Vector3Int(i, j, 0), null);
+                tilemap.SetTile(new Vector3Int(i, j, 0), null);
             }
         }
 
@@ -133,6 +137,28 @@ public class MapGeneratorScript : MonoBehaviour {
         if (GameObject.FindGameObjectWithTag("Goal") != null) Destroy(GameObject.FindGameObjectWithTag("Goal"));
         if (GameObject.FindGameObjectWithTag("EnemyGenerator") != null) Destroy(GameObject.FindGameObjectWithTag("EnemyGenerator"));
     }
+
+
+
+    private void GenerateWalls( int nLevel )
+    {
+        if( nLevel%10 == 1 )
+        {
+            for( int i=minX+1; i<=maxX; i+=2 )
+            {
+                for( int j=minY+1; j<=maxY; j+=2 )
+                {
+                    tilemap.SetTile(new Vector3Int(i, j, 0), wall);
+                }
+            }
+        }
+    }
+
+
+
+
+
+
 
 
 

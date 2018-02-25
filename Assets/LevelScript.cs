@@ -56,7 +56,9 @@ public class LevelScript : MonoBehaviour {
 
         player.GetComponent<Transform>().position = respawn;
 
+        mapGenerator.GetComponent<MapGeneratorScript>().DestroyOldMap();
         mapGenerator.GetComponent<MapGeneratorScript>().GenerateNewMap();
+        win = false;
     }
 
     public void Killed()
@@ -76,6 +78,7 @@ public class LevelScript : MonoBehaviour {
 
         if (tilemap.WorldToCell(GameObject.FindGameObjectWithTag("Goal").GetComponent<Transform>().position) == tilemap.WorldToCell(player.GetComponent<Transform>().position))
         {
+
             ingoal = true;
         }
 
