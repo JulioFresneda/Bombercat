@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+
 public class MapGeneratorScript : MonoBehaviour {
 
     
@@ -52,21 +53,22 @@ public class MapGeneratorScript : MonoBehaviour {
         numberPowerUps = nLevel + 1;
         int random;
         GameObject powerup;
+        int maxRandomTries = 1000;
 
 
         GenerateWalls(nLevel);
-        
 
 
-        for (int i = 0; i < numberDestructables * nLevel && i < 100; i++)
+        for (int i = 0; i < Mathf.Max(15,numberDestructables * nLevel/2) && i < 50; i++)
         {
             x = Random.Range(minX, maxX);
             y = Random.Range(minY, maxY);
 
-            while (CantPutDestructable(x, y))
+            while (CantPutDestructable(x, y) && maxRandomTries > 0 )
             {
                 x = Random.Range(minX, maxX);
                 y = Random.Range(minY, maxY);
+                maxRandomTries--;
             }
 
             tilemap.SetTile(new Vector3Int(x, y, 0), destructable); // Destructables
@@ -81,11 +83,12 @@ public class MapGeneratorScript : MonoBehaviour {
                 Instantiate(powerup, tilemap.GetCellCenterWorld(new Vector3Int(x, y, 0)), Quaternion.identity);
             }
         }
-
-        while (CantPutEnemyGenerator(x, y) )
+        maxRandomTries = 1000;
+        while (CantPutEnemyGenerator(x, y) && maxRandomTries > 0 )
         {
             x = Random.Range(minX, maxX);
             y = Random.Range(minY, maxY);
+            maxRandomTries--;
         }
 
         currentEnemyGen = Instantiate(enemyGenerator, tilemap.GetCellCenterWorld(new Vector3Int(x, y, 0)), Quaternion.identity);
@@ -93,6 +96,10 @@ public class MapGeneratorScript : MonoBehaviour {
         currentEnemyGen.GetComponent<EnemyGeneratorScript>().GenerateEnemies(level.GetComponent<LevelScript>().level);
         enemyGenCell = new Vector3Int(x, y, 0);
 
+        if( tilemap.GetTile(new Vector3Int(x-1,y,0)) == destructable ) tilemap.SetTile(new Vector3Int(x - 1, y, 0), null);
+        if (tilemap.GetTile(new Vector3Int(x + 1, y, 0)) == destructable) tilemap.SetTile(new Vector3Int(x + 1, y, 0), null);
+        if (tilemap.GetTile(new Vector3Int(x, y - 1, 0)) == destructable) tilemap.SetTile(new Vector3Int(x, y - 1, 0), null);
+        if (tilemap.GetTile(new Vector3Int(x, y + 1, 0)) == destructable) tilemap.SetTile(new Vector3Int(x, y + 1, 0), null);
 
         while (CantPutGoal(x, y))
         {
@@ -110,7 +117,10 @@ public class MapGeneratorScript : MonoBehaviour {
 
     public void DestroyOldMap()
     {
-
+        foreach( GameObject explosion in GameObject.FindGameObjectsWithTag("Explosion"))
+        {
+            Destroy(explosion); 
+        }
 
         maxY = level.GetComponent<LevelScript>().maxY;
         maxX = level.GetComponent<LevelScript>().maxX;
@@ -142,6 +152,77 @@ public class MapGeneratorScript : MonoBehaviour {
 
     private void GenerateWalls( int nLevel )
     {
+
+        if (nLevel % 10 == 7)
+        {
+            for (int i = minX + 1; i <= maxX; i += 2)
+            {
+                for (int j = minY + 1; j <= maxY; j += 2)
+                {
+                    tilemap.SetTile(new Vector3Int(i, j, 0), wall);
+                }
+            }
+
+            for( int i=minX; i<=maxX; i++ )
+            {
+                if( i > minX ) tilemap.SetTile(new Vector3Int(i, 4, 0), wall);
+                if (i > minX) tilemap.SetTile(new Vector3Int(i, -4, 0), wall);
+                if (i < maxX) tilemap.SetTile(new Vector3Int(i, 0, 0), wall);
+            }
+        }
+
+        if (nLevel % 10 == 6)
+        {
+            for (int i = minX + 1; i <= maxX; i += 2)
+            {
+                for (int j = minY + 1; j <= maxY; j += 2)
+                {
+                    if( i != 0 && j != -1 ) tilemap.SetTile(new Vector3Int(i, j, 0), wall);
+                }
+            }
+
+            for (int i = minX; i <= maxX; i++)
+            {
+                if (i != minX + 2 && i != maxX - 2)
+                {
+                    tilemap.SetTile(new Vector3Int(i, 0, 0), wall);
+                    tilemap.SetTile(new Vector3Int(i, -2, 0), wall);
+                }
+            }
+
+
+            for (int i = minY; i <= maxY; i++)
+            {
+                if (i != minY + 2 && i != maxY - 2)
+                {
+                    tilemap.SetTile(new Vector3Int(-1, i, 0), wall);
+                    tilemap.SetTile(new Vector3Int(1, i, 0), wall);
+                }
+            }
+        }
+
+        if (nLevel % 10 == 5)
+        {
+            for (int i = minX + 1; i <= maxX; i += 2)
+            {
+                for (int j = minY + 1; j <= maxY; j += 2)
+                {
+                    tilemap.SetTile(new Vector3Int(i, j, 0), wall);
+                }
+            }
+
+            for( int i=minY; i<=maxY; i++ )
+            {
+                if( i<maxY ) tilemap.SetTile(new Vector3Int(minX+1, i, 0), wall);
+                if( i>minY ) tilemap.SetTile(new Vector3Int(5, i, 0), wall);
+            }
+
+            for( int i=minX+2; i<maxX-1; i++ )
+            {
+                if( i > minX+2) tilemap.SetTile(new Vector3Int(i, -6, 0), wall);
+                if( i < maxX-3) tilemap.SetTile(new Vector3Int(i, 4, 0), wall);
+            }
+        }
 
         if (nLevel % 10 == 4)
         {
@@ -287,7 +368,10 @@ public class MapGeneratorScript : MonoBehaviour {
             if (GameObject.FindGameObjectWithTag("EnemyGenerator") != null) cant = (new Vector3Int(x, y, 0) == GameObject.FindGameObjectWithTag("EnemyGenerator").GetComponent<Transform>().position);
         }
 
+
         if (!cant) cant = (x <= 0 && y >= 0);
+
+        
 
         return cant;
     }

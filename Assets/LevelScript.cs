@@ -78,8 +78,7 @@ public class LevelScript : MonoBehaviour {
 
         if (tilemap.WorldToCell(GameObject.FindGameObjectWithTag("Goal").GetComponent<Transform>().position) == tilemap.WorldToCell(player.GetComponent<Transform>().position))
         {
-
-            ingoal = true;
+            if( GameObject.FindGameObjectsWithTag("Enemy").Length == 0 ) ingoal = true;
         }
 
         return ingoal;

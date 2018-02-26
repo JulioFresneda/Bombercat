@@ -10,6 +10,7 @@ public class ScoreScript : MonoBehaviour {
     public Text bombsText;
     public Text velocityText;
     public Text powerText;
+    public Text nickText;
 
     float velocityNormalized;
 
@@ -26,6 +27,8 @@ public class ScoreScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        nickText.text = "Nick: " + PlayerPrefs.GetString("nick");
         scoreText.text = "Score: " + level.GetComponent<LevelScript>().score.ToString();
         levelText.text = "Level: " + level.GetComponent<LevelScript>().level.ToString();
         lifesText.text = "Lifes: " + level.GetComponent<LevelScript>().lifes.ToString();

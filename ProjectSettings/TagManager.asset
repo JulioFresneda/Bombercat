@@ -12,6 +12,12 @@ TagManager:
   - Goal
   - TilemapGameplay
   - EnemyGenerator
+  - Play
+  - SelectPlayer
+  - Highscores
+  - Quit
+  - Explosion
+  - InputNick
   layers:
   - Default
   - TransparentFX
