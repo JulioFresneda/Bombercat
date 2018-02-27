@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.SceneManagement;
+using System;
 
 public class LevelScript : MonoBehaviour {
 
@@ -69,7 +71,51 @@ public class LevelScript : MonoBehaviour {
             player.GetComponent<Transform>().position = respawn;
             player.GetComponent<PlayerController>().Default();
         }
-        // else GameOver
+        else
+        {
+            int hs1, hs2, hs3;
+            string n1, n2, n3;
+
+            hs1 = PlayerPrefs.GetInt("hs1o");
+            hs2 = PlayerPrefs.GetInt("hs2o");
+            hs3 = PlayerPrefs.GetInt("hs3o");
+
+            n1 = String.Copy(PlayerPrefs.GetString("nick1o"));
+            n2 = String.Copy(PlayerPrefs.GetString("nick2o"));
+            n3 = String.Copy(PlayerPrefs.GetString("nick3o"));
+
+            if (score > hs1)
+            {
+
+                PlayerPrefs.SetString("nick3o", n2);
+                PlayerPrefs.SetString("nick2o", n1);
+                PlayerPrefs.SetString("nick1o", PlayerPrefs.GetString("nick"));
+
+
+                PlayerPrefs.SetInt("hs3o", hs2);
+                PlayerPrefs.SetInt("hs2o", hs1);
+                PlayerPrefs.SetInt("hs1o", score);
+            }
+            else if (score > hs2)
+            {
+                PlayerPrefs.SetString("nick3o", n2);
+                PlayerPrefs.SetString("nick2o", n1);
+
+                PlayerPrefs.SetInt("hs3o", hs2);
+                PlayerPrefs.SetInt("hs2o", score);
+
+            }
+            else if (score > hs3)
+            {
+                PlayerPrefs.SetString("nick3o", PlayerPrefs.GetString("nick"));
+
+                PlayerPrefs.SetInt("hs3o", score);
+            }
+
+            SceneManager.LoadScene("Menu");
+
+            
+        }
     }
 
     bool InGoal()
