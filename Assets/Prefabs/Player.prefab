@@ -21,8 +21,9 @@ GameObject:
   - component: {fileID: 4637748865801360}
   - component: {fileID: 212919402469758584}
   - component: {fileID: 50686114768988228}
-  - component: {fileID: 58324547339509236}
   - component: {fileID: 114421956379079924}
+  - component: {fileID: 70885912074338698}
+  - component: {fileID: 95693263477257158}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -37,8 +38,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1529675929114346}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.48, y: 5.46, z: 0}
-  m_LocalScale: {x: 5.216202, y: 5.2162023, z: 5.2162023}
+  m_LocalPosition: {x: -5.45, y: 5.72, z: 0}
+  m_LocalScale: {x: 4.6095095, y: 4.6095047, z: 4.6095047}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -63,8 +64,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &58324547339509236
-CircleCollider2D:
+--- !u!70 &70885912074338698
+CapsuleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -75,9 +76,26 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.08
+  m_Offset: {x: 0.003282199, y: -0.05601494}
+  m_Size: {x: 0.16598018, y: 0.2035101}
+  m_Direction: 0
+--- !u!95 &95693263477257158
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1529675929114346}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 32e3fc0eaab0a8b47a1434eebb397f1d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114421956379079924
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -94,6 +112,7 @@ MonoBehaviour:
   bombsTogether: 1
   wallTile: {fileID: 11400000, guid: dd221daf9de1c624b82c1f90bda93bae, type: 2}
   destructibleTile: {fileID: 11400000, guid: f5cead61b9ade294eaef2b42ad349148, type: 2}
+  playerAnimator: {fileID: 0}
 --- !u!212 &212919402469758584
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -128,7 +147,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d65bd078b5737764d924c27b00879b44, type: 3}
+  m_Sprite: {fileID: 21300000, guid: eecce66a3974d494fbbf807e531ead6d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

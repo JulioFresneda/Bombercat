@@ -28,11 +28,12 @@ public class LevelScript : MonoBehaviour {
 
 
     private Vector3 respawn;
-
+    private bool dying;
 
 
     // Use this for initialization
     void Start () {
+        dying = false;
         level = 1;
         score = 0;
         lifes = 3;
@@ -41,7 +42,7 @@ public class LevelScript : MonoBehaviour {
         respawn = tilemap.GetCellCenterWorld(new Vector3Int(-6, 5, 0));
 
         player = Instantiate(player, respawn, Quaternion.identity);
-        Debug.Log("xx");
+    
         mapGenerator.GetComponent<MapGeneratorScript>().GenerateNewMap();
     }
 	
@@ -65,30 +66,37 @@ public class LevelScript : MonoBehaviour {
 
     public void Killed()
     {
-        if (lifes > 1)
+        if (lifes > 1 && !dying )
         {
+            dying = true;
             lifes--;
+
+     
             player.GetComponent<Transform>().position = respawn;
             player.GetComponent<PlayerController>().Default();
+
+           
+
+            dying = false;
         }
         else
         {
+
             int hs1, hs2, hs3;
-            string n1, n2, n3;
+    
 
             hs1 = PlayerPrefs.GetInt("hs1o");
             hs2 = PlayerPrefs.GetInt("hs2o");
             hs3 = PlayerPrefs.GetInt("hs3o");
 
-            n1 = String.Copy(PlayerPrefs.GetString("nick1o"));
-            n2 = String.Copy(PlayerPrefs.GetString("nick2o"));
-            n3 = String.Copy(PlayerPrefs.GetString("nick3o"));
+
+ 
 
             if (score > hs1)
             {
 
-                PlayerPrefs.SetString("nick3o", n2);
-                PlayerPrefs.SetString("nick2o", n1);
+                PlayerPrefs.SetString("nick3o", String.Copy(PlayerPrefs.GetString("nick2o")));
+                PlayerPrefs.SetString("nick2o", String.Copy(PlayerPrefs.GetString("nick1o")));
                 PlayerPrefs.SetString("nick1o", PlayerPrefs.GetString("nick"));
 
 
@@ -98,8 +106,8 @@ public class LevelScript : MonoBehaviour {
             }
             else if (score > hs2)
             {
-                PlayerPrefs.SetString("nick3o", n2);
-                PlayerPrefs.SetString("nick2o", n1);
+                PlayerPrefs.SetString("nick3o", String.Copy(PlayerPrefs.GetString("nick2o")));
+                PlayerPrefs.SetString("nick2o", String.Copy(PlayerPrefs.GetString("nick")));
 
                 PlayerPrefs.SetInt("hs3o", hs2);
                 PlayerPrefs.SetInt("hs2o", score);
@@ -107,7 +115,7 @@ public class LevelScript : MonoBehaviour {
             }
             else if (score > hs3)
             {
-                PlayerPrefs.SetString("nick3o", PlayerPrefs.GetString("nick"));
+                PlayerPrefs.SetString("nick3o", String.Copy(PlayerPrefs.GetString("nick")));
 
                 PlayerPrefs.SetInt("hs3o", score);
             }
@@ -129,6 +137,13 @@ public class LevelScript : MonoBehaviour {
 
         return ingoal;
     }
+
+    IEnumerator Wait(float time)
+    {
+        yield return new WaitForSeconds(time);
+    }
+
+
 
 
 }
