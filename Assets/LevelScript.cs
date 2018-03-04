@@ -22,7 +22,7 @@ public class LevelScript : MonoBehaviour {
     public int lifes;
 
 
-    public GameObject c1player, c2player;
+    public GameObject c1player, c2player, c3player;
     public Tilemap tilemap;
 
 
@@ -51,6 +51,11 @@ public class LevelScript : MonoBehaviour {
         {
             player = Instantiate(c2player, respawn, Quaternion.identity);
             Debug.Log("Create c2");
+        }
+        else if (PlayerPrefs.GetInt("character") == 3)
+        {
+            player = Instantiate(c3player, respawn, Quaternion.identity);
+            Debug.Log("Create c3");
         }
         else player = Instantiate(c1player, respawn, Quaternion.identity);
 

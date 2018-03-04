@@ -84,22 +84,29 @@ public class MapGeneratorScript : MonoBehaviour {
             }
         }
         maxRandomTries = 1000;
-        while (CantPutEnemyGenerator(x, y) && maxRandomTries > 0 )
+
+        for( int i=0; i<nLevel%10; i++ )
         {
-            x = Random.Range(minX, maxX);
-            y = Random.Range(minY, maxY);
-            maxRandomTries--;
+            while (CantPutEnemyGenerator(x, y) && maxRandomTries > 0)
+            {
+                x = Random.Range(minX, maxX);
+                y = Random.Range(minY, maxY);
+                maxRandomTries--;
+            }
+
+            currentEnemyGen = Instantiate(enemyGenerator, tilemap.GetCellCenterWorld(new Vector3Int(x, y, 0)), Quaternion.identity);
+
+            currentEnemyGen.GetComponent<EnemyGeneratorScript>().GenerateEnemies(level.GetComponent<LevelScript>().level);
+            enemyGenCell = new Vector3Int(x, y, 0);
+
+            if (tilemap.GetTile(new Vector3Int(x - 1, y, 0)) == destructable) tilemap.SetTile(new Vector3Int(x - 1, y, 0), null);
+            if (tilemap.GetTile(new Vector3Int(x + 1, y, 0)) == destructable) tilemap.SetTile(new Vector3Int(x + 1, y, 0), null);
+            if (tilemap.GetTile(new Vector3Int(x, y - 1, 0)) == destructable) tilemap.SetTile(new Vector3Int(x, y - 1, 0), null);
+            if (tilemap.GetTile(new Vector3Int(x, y + 1, 0)) == destructable) tilemap.SetTile(new Vector3Int(x, y + 1, 0), null);
         }
-
-        currentEnemyGen = Instantiate(enemyGenerator, tilemap.GetCellCenterWorld(new Vector3Int(x, y, 0)), Quaternion.identity);
         
-        currentEnemyGen.GetComponent<EnemyGeneratorScript>().GenerateEnemies(level.GetComponent<LevelScript>().level);
-        enemyGenCell = new Vector3Int(x, y, 0);
 
-        if( tilemap.GetTile(new Vector3Int(x-1,y,0)) == destructable ) tilemap.SetTile(new Vector3Int(x - 1, y, 0), null);
-        if (tilemap.GetTile(new Vector3Int(x + 1, y, 0)) == destructable) tilemap.SetTile(new Vector3Int(x + 1, y, 0), null);
-        if (tilemap.GetTile(new Vector3Int(x, y - 1, 0)) == destructable) tilemap.SetTile(new Vector3Int(x, y - 1, 0), null);
-        if (tilemap.GetTile(new Vector3Int(x, y + 1, 0)) == destructable) tilemap.SetTile(new Vector3Int(x, y + 1, 0), null);
+       
 
         while (CantPutGoal(x, y))
         {
@@ -152,6 +159,35 @@ public class MapGeneratorScript : MonoBehaviour {
 
     private void GenerateWalls( int nLevel )
     {
+
+        if( nLevel % 10 == 9 )
+        {
+            for (int i = minX; i <= maxX; i++)
+            {
+                if( i != 0 && i != -1 && i != 1 ) tilemap.SetTile(new Vector3Int(i, -1, 0), wall);
+            }
+
+            for (int i = minY+1; i < maxY; i++)
+            {
+                if( i != -2 && i != -1 && i != 0 ) tilemap.SetTile(new Vector3Int(0, i, 0), wall);
+            }
+
+            tilemap.SetTile(new Vector3Int(-1, 0, 0), wall);
+            tilemap.SetTile(new Vector3Int(1, -2, 0), wall);
+        }
+
+        if( nLevel % 10 == 8 )
+        {
+            for( int i = minX+1; i<maxX; i++ )
+            {
+                tilemap.SetTile(new Vector3Int(i, -1, 0), wall);
+            }
+
+            for (int i = minY + 1; i < maxY; i++)
+            {
+                tilemap.SetTile(new Vector3Int(0, i, 0), wall);
+            }
+        }
 
         if (nLevel % 10 == 7)
         {

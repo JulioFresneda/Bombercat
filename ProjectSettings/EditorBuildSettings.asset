@@ -14,3 +14,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Bomberman.unity
     guid: c8346bd9d0d56c34ab9591563d43368a
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: bb4766fe63314c64794e36d5472aaf86
