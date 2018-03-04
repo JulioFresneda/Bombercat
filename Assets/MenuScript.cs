@@ -11,6 +11,7 @@ public class MenuScript : MonoBehaviour {
 
     public void Start()
     {
+        highscorespanel.SetActive(false);
         primero.text = PlayerPrefs.GetString("nick1o", "-") + ": " + PlayerPrefs.GetInt("hs1o", 0);
         segundo.text = PlayerPrefs.GetString("nick2o", "-") + ": " + PlayerPrefs.GetInt("hs2o", 0);
         tercero.text = PlayerPrefs.GetString("nick3o", "-") + ": " + PlayerPrefs.GetInt("hs3o", 0);

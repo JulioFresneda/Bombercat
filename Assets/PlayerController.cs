@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour {
     void Move()
     {
 
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow) )
         {
             if (!playerAnimator.GetBool("WalkingLeft"))
             {
@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour {
             }
             rigidbody.velocity = new Vector2(-velocityPlayer, 0);
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             if (!playerAnimator.GetBool("WalkingRight"))
             {
@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour {
             }
             rigidbody.velocity = new Vector2(velocityPlayer, 0);
         }
-        else if (Input.GetKey(KeyCode.W))
+        else if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
             if( playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("IdleRight") || playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("WalkingRight"))
             {
@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour {
             }
             rigidbody.velocity = new Vector2(0, velocityPlayer);
         }
-        else if (Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
             if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("IdleRight") || playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("WalkingRight"))
             {

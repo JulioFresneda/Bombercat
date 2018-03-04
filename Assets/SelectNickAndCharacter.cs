@@ -23,6 +23,7 @@ public class SelectNickAndCharacter : MonoBehaviour {
 
     public void Character( int numChar  )
     {
+        Debug.Log("Character " + numChar + " selected");
         PlayerPrefs.SetInt("character", numChar);
     }
 

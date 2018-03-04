@@ -22,13 +22,14 @@ public class LevelScript : MonoBehaviour {
     public int lifes;
 
 
-    public GameObject player, c2player;
+    public GameObject c1player, c2player;
     public Tilemap tilemap;
 
 
 
     private Vector3 respawn;
     private bool dying;
+    private GameObject player;
 
 
     // Use this for initialization
@@ -41,8 +42,17 @@ public class LevelScript : MonoBehaviour {
         tilemap = GameObject.FindGameObjectWithTag("TilemapGameplay").GetComponent<Tilemap>();
         respawn = tilemap.GetCellCenterWorld(new Vector3Int(-6, 5, 0));
 
-        if( PlayerPrefs.GetInt("character") == 1 ) player = Instantiate(player, respawn, Quaternion.identity);
-        else if(PlayerPrefs.GetInt("character") == 2) player = Instantiate(c2player, respawn, Quaternion.identity);
+        if (PlayerPrefs.GetInt("character") == 1)
+        {
+            player = Instantiate(c1player, respawn, Quaternion.identity);
+            Debug.Log("Create c1");
+        }
+        else if (PlayerPrefs.GetInt("character") == 2)
+        {
+            player = Instantiate(c2player, respawn, Quaternion.identity);
+            Debug.Log("Create c2");
+        }
+        else player = Instantiate(c1player, respawn, Quaternion.identity);
 
         mapGenerator.GetComponent<MapGeneratorScript>().GenerateNewMap();
     }
@@ -78,8 +88,8 @@ public class LevelScript : MonoBehaviour {
             player.GetComponent<Transform>().position = respawn;
             player.GetComponent<PlayerController>().Default();
 
-           
 
+            Wait(0.5f);
             dying = false;
         }
         else

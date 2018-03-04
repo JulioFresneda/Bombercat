@@ -3,7 +3,14 @@ guid: f64459c53db2e1d4b8c9fcd59ba6e1a7
 timeCreated: 1520127063
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: C2rightwalkScaled_0
+    21300002: C2rightwalkScaled_1
+    21300004: C2rightwalkScaled_2
+    21300006: C2rightwalkScaled_3
+    21300008: C2rightwalkScaled_4
+    21300010: C2rightwalkScaled_5
+    21300012: C2rightwalkScaled_6
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -40,7 +47,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -66,9 +73,127 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: C2rightwalkScaled_0
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 14
+        width: 150
+        height: 225
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: C2rightwalkScaled_1
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 12
+        width: 147
+        height: 227
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: C2rightwalkScaled_2
+      rect:
+        serializedVersion: 2
+        x: 430
+        y: 14
+        width: 141
+        height: 233
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: C2rightwalkScaled_3
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 13
+        width: 150
+        height: 222
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: C2rightwalkScaled_4
+      rect:
+        serializedVersion: 2
+        x: 790
+        y: 14
+        width: 137
+        height: 227
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: C2rightwalkScaled_5
+      rect:
+        serializedVersion: 2
+        x: 937
+        y: 14
+        width: 137
+        height: 238
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: C2rightwalkScaled_6
+      rect:
+        serializedVersion: 2
+        x: 1072
+        y: 16
+        width: 151
+        height: 229
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
     outline: []
     physicsShape: []
   spritePackingTag: 
