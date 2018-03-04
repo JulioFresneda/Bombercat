@@ -133,7 +133,9 @@ public class LevelScript : MonoBehaviour {
                 PlayerPrefs.SetInt("hs3o", score);
             }
 
-            SceneManager.LoadScene("Menu");
+            PlayerPrefs.SetInt("fs", score);
+            PlayerPrefs.SetInt("fl", level);
+            SceneManager.LoadScene("GameOver");
 
             
         }
