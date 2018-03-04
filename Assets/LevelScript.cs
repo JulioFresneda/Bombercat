@@ -22,7 +22,7 @@ public class LevelScript : MonoBehaviour {
     public int lifes;
 
 
-    public GameObject player;
+    public GameObject player, c2player;
     public Tilemap tilemap;
 
 
@@ -41,14 +41,16 @@ public class LevelScript : MonoBehaviour {
         tilemap = GameObject.FindGameObjectWithTag("TilemapGameplay").GetComponent<Tilemap>();
         respawn = tilemap.GetCellCenterWorld(new Vector3Int(-6, 5, 0));
 
-        player = Instantiate(player, respawn, Quaternion.identity);
-    
+        if( PlayerPrefs.GetInt("character") == 1 ) player = Instantiate(player, respawn, Quaternion.identity);
+        else if(PlayerPrefs.GetInt("character") == 2) player = Instantiate(c2player, respawn, Quaternion.identity);
+
         mapGenerator.GetComponent<MapGeneratorScript>().GenerateNewMap();
     }
 	
 	// Update is called once per frame
 	void Update () {
         if (InGoal() && !win) Win();
+        
     }
 
     public void Win()
@@ -56,6 +58,7 @@ public class LevelScript : MonoBehaviour {
         win = true;
         score += 100 * level;
         level++;
+        if (level == 2) PlayerPrefs.SetInt("c2u", 1);
 
         player.GetComponent<Transform>().position = respawn;
 

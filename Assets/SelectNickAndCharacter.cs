@@ -8,7 +8,13 @@ public class SelectNickAndCharacter : MonoBehaviour {
 
     public InputField inputNick;
 
-	public void Nick()
+
+    public void Start()
+    {
+        if (PlayerPrefs.GetInt("c2u") == 1) GameObject.Find("c2locked").SetActive(false);
+    }
+
+    public void Nick()
     {
         string nick = inputNick.text;
         PlayerPrefs.SetString( "nick", nick );

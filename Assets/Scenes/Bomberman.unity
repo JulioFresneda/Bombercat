@@ -150,6 +150,7 @@ MonoBehaviour:
   mapGenerator: {fileID: 1910365508}
   lifes: 0
   player: {fileID: 1529675929114346, guid: 15b3daf0e11115e4d83614ea896f29dd, type: 2}
+  c2player: {fileID: 1524814052848160, guid: 54c17c194a0553a428435ceac056b941, type: 2}
   tilemap: {fileID: 1735307838}
 --- !u!4 &61045581
 Transform:
