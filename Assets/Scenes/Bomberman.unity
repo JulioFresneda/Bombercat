@@ -225,6 +225,8 @@ MonoBehaviour:
   c1player: {fileID: 1952352389067334, guid: 4d6e3b9559016c8448247eb8538fd539, type: 2}
   c2player: {fileID: 1524814052848160, guid: 54c17c194a0553a428435ceac056b941, type: 2}
   c3player: {fileID: 1379580291261260, guid: 364857226d0a2a545b896e1e5462252a, type: 2}
+  c4player: {fileID: 1453536050819224, guid: 8ff814c8d96939b45856231b34cad35f, type: 2}
+  c5player: {fileID: 0}
   tilemap: {fileID: 1735307838}
 --- !u!4 &61045581
 Transform:

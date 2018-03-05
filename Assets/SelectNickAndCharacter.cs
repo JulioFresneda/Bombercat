@@ -13,6 +13,8 @@ public class SelectNickAndCharacter : MonoBehaviour {
     {
         if (PlayerPrefs.GetInt("c2u") == 1) GameObject.Find("c2locked").SetActive(false);
         if (PlayerPrefs.GetInt("c3u") == 1) GameObject.Find("c3locked").SetActive(false);
+        if (PlayerPrefs.GetInt("c4u") == 1) GameObject.Find("c4locked").SetActive(false);
+        if (PlayerPrefs.GetInt("c5u") == 1) GameObject.Find("c5locked").SetActive(false);
     }
 
     public void Nick()
