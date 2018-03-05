@@ -35,7 +35,6 @@ public class LevelScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-        
         dying = false;
         level = 1;
         score = 0;
